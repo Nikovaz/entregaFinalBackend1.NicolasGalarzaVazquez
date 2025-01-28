@@ -12,10 +12,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
 
-const SERVER_PORT = 9090;
+const SERVER_PORT = 8080;
 app.listen(SERVER_PORT, () => {
     console.log(`Servidor escuchando por el puerto: ${SERVER_PORT}`);
     console.log(`URL para usar en Postman: http://localhost:${SERVER_PORT}/api/products`);
     console.log(`URL para usar en Postman: http://localhost:${SERVER_PORT}/api/carts`);
 });
-
