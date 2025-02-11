@@ -1,89 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Helvetica Neue', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
     margin: 0;
-    padding: 20px;
+    padding: clamp(1rem, 2vw, 3rem);
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.1rem;
 }
 
-h1, h2, h4 {
-    color: #333;
-    margin-bottom: 10px;
+a {
+    color: inherit;
+}
+
+.wrapper {
+    max-width: 80rem;
+    margin: 0 auto;
+}
+
+ol {
+    padding: 1.5rem 1.5rem 1.5rem 4em;
+    border: 0.3rem solid turquoise;
+    columns: 15rem;
+    column-gap: 7rem;
+    column-rule: 4px dotted turquoise;
+    border-radius: 0.5rem;
+}
+
+ol > * + * {
+    margin-top: 1rem;
+}
+
+li {
+/*  break-inside: avoid; */
+}
+
+::marker {
+    content: counters(list-item, '') ': ';
     font-weight: 700;
+    font-size: 1.5em;
+    color: turquoise;
 }
 
-h1 {
-    font-size: 2.2rem;
+li span {
+    display: block;
 }
 
-h2 {
-    font-size: 1.8rem;
+li span:first-child {
+    font-size: 1.5em;
 }
 
-h4 {
-    font-size: 1.4rem;
-}
-
-#myName {
-    font-weight: bold;
-    color: #333;
-}
-
-div {
-    margin-bottom: 20px;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="submit"],
-button {
-    font-size: 1rem;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    width: calc(100% - 24px);
-}
-
-input[type="text"]:focus,
-input[type="number"]:focus,
-button:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#product-list {
-    list-style: none;
-    padding: 0;
-}
-
-#product-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-#messageLogs {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    min-height: 100px;
-    overflow-y: auto;
-}
-
-p {
-    margin: 5px 0;
+li span:last-child {
+    font-style: italic;
 }

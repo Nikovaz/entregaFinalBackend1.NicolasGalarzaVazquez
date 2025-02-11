@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Time Products</title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <h1>Real Time Products</h1>
-    <ul id="products-list">
-        {{#each products}}
-        <li>{{this.name}} - {{this.price}} <button onclick="deleteProduct('{{this.id}}')">Eliminar</button></li>
-        {{/each}}
-    </ul>
-    <form id="product-form">
-        <input type="text" id="product-name" placeholder="Nombre del producto" required>
-        <input type="number" id="product-price" placeholder="Precio del producto" required>
-        <button type="submit">Agregar producto</button>
-    </form>
+    <div class="wrapper">
+        <h1>Real Time Products</h1>
+        <a href="/" class="button">Volver a Home</a>
+        <ol id="products-list">
+            {{#each products}}
+            <li>
+                <span>{{this.name}}</span>
+                <span>{{this.price}}</span>
+                <button onclick="deleteProduct('{{this.id}}')">Eliminar</button>
+            </li>
+            {{/each}}
+        </ol>
+        <form id="product-form">
+            <input type="text" id="product-name" placeholder="Nombre del producto" required>
+            <input type="number" id="product-price" placeholder="Precio del producto" required>
+            <button type="submit">Agregar producto</button>
+        </form>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/index.js" defer></script>
 </body>

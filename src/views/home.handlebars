@@ -4,14 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <h1>Home</h1>
-    <ul id="home-products-list">
-        {{#each products}}
-        <li>{{this.name}} - {{this.price}}</li>
-        {{/each}}
-    </ul>
+    <div class="wrapper">
+        <h1>Home</h1>
+        <ol id="home-products-list">
+            {{#each products}}
+            <li>
+                <span>{{this.name}}</span>
+                <span>{{this.price}}</span>
+            </li>
+            {{/each}}
+        </ol>
+        <a href="/realtimeproducts">Ver productos en Tiempo real</a>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
@@ -20,11 +27,10 @@
             productList.innerHTML = '';
             products.forEach((product) => {
                 const li = document.createElement('li');
-                li.textContent = `${product.name} - ${product.price}`;
+                li.innerHTML = `<span>${product.name}</span><span>${product.price}</span>`;
                 productList.appendChild(li);
             });
         });
     </script>
-    <a href="/realtimeproducts">Ver productos en Tiempo real</a>
 </body>
 </html>
