@@ -1,0 +1,89 @@
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2, h4 {
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+h4 {
+    font-size: 1.4rem;
+}
+
+#myName {
+    font-weight: bold;
+    color: #333;
+}
+
+div {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="submit"],
+button {
+    font-size: 1rem;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    width: calc(100% - 24px);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+button:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#product-list {
+    list-style: none;
+    padding: 0;
+}
+
+#product-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#messageLogs {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    min-height: 100px;
+    overflow-y: auto;
+}
+
+p {
+    margin: 5px 0;
+}
