@@ -31,9 +31,9 @@ ol > * + * {
     margin-top: 1rem;
 }
 
-li {
-/*  break-inside: avoid; */
-}
+/* li {
+    break-inside: avoid;
+} */
 
 ::marker {
     content: counters(list-item, '') ': ';
