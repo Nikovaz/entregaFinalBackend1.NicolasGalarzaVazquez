@@ -15,7 +15,7 @@
             <li>
                 <span>{{this.name}}</span>
                 <span>{{this.price}}</span>
-                <button onclick="deleteProduct('{{this.id}}')">Eliminar</button>
+                <button onclick="deleteProduct('{{this._id}}')">Eliminar</button>
             </li>
             {{/each}}
         </ol>
@@ -26,6 +26,41 @@
         </form>
     </div>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/index.js" defer></script>
+    <script>
+        const socket = io();
+
+        document.getElementById('product-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('product-name').value;
+            const price = document.getElementById('product-price').value;
+            socket.emit('addProduct', { name, price });
+        });
+
+        socket.on('productAdded', (product) => {
+            const productList = document.getElementById('products-list');
+            const li = document.createElement('li');
+            li.innerHTML = `<span>${product.name}</span><span>${product.price}</span><button onclick="deleteProduct('${product._id}')">Eliminar</button>`;
+            productList.appendChild(li);
+        });
+
+        socket.on('productDeleted', (product) => {
+            const productList = document.getElementById('products-list');
+            const items = productList.getElementsByTagName('li');
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].innerHTML.includes(product._id)) {
+                    productList.removeChild(items[i]);
+                    break;
+                }
+            }
+        });
+
+        function deleteProduct(productId) {
+            if (!productId) {
+                console.error('No se proporcionó un ID de producto');
+                return;
+            }
+            socket.emit('deleteProduct', productId.toString()); // Envía el ID como string
+        }
+    </script>
 </body>
 </html>

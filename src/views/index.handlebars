@@ -1,7 +1,7 @@
 {{#> main}}
 <div class="wrapper">
-    <h1>Home</h1>
-    <form id="filter-form" method="GET" action="/">
+    <h1>Productos</h1>
+    <form id="filter-form" method="GET" action="/products">
         <label for="query">Buscar:</label>
         <input type="text" id="query" name="query" value="{{query}}">
         <label for="limit">Límite:</label>
@@ -14,12 +14,13 @@
         </select>
         <button type="submit">Aplicar</button>
     </form>
-    <ol id="home-products-list">
+    <ol id="products-list">
         {{#each products}}
         <li>
             <span>{{this.name}}</span>
             <span>{{this.price}}</span>
-            <button onclick="deleteProduct('{{this._id}}')">Eliminar</button>
+            <a href="/products/{{this._id}}">Ver detalles</a>
+            <button onclick="addToCart('{{this._id}}')">Agregar al carrito</button>
         </li>
         {{/each}}
     </ol>
@@ -32,35 +33,23 @@
         <a href="?page={{nextPage}}&limit={{limit}}&sort={{sort}}&query={{query}}">Siguiente</a>
         {{/if}}
     </div>
-    <a href="/realtimeproducts">Ver productos en Tiempo real</a>
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script>
     const socket = io();
 
-    function deleteProduct(productId) {
-        socket.emit('deleteProduct', productId);
+    function addToCart(productId) {
+        socket.emit('addToCart', productId);
     }
 
     socket.on('productList', (products) => {
-        const productList = document.getElementById('home-products-list');
+        const productList = document.getElementById('products-list');
         productList.innerHTML = '';
         products.forEach((product) => {
             const li = document.createElement('li');
-            li.innerHTML = `<span>${product.name}</span><span>${product.price}</span><button onclick="deleteProduct('${product._id}')">Eliminar</button>`;
+            li.innerHTML = `<span>${product.name}</span><span>${product.price}</span><a href="/products/${product._id}">Ver detalles</a><button onclick="addToCart('${product._id}')">Agregar al carrito</button>`;
             productList.appendChild(li);
         });
-    });
-
-    socket.on('productDeleted', (product) => {
-        const productList = document.getElementById('home-products-list');
-        const items = productList.getElementsByTagName('li');
-        for (let i = 0; i < items.length; i++) {
-            if (items[i].innerHTML.includes(product._id)) {
-                productList.removeChild(items[i]);
-                break;
-            }
-        }
     });
 </script>
 {{/main}}

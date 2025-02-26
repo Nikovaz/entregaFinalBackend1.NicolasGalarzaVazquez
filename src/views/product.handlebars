@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{product.name}}</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <div class="wrapper">
+        <h1>{{product.name}}</h1>
+        <p>{{product.description}}</p>
+        <p>Precio: {{product.price}}</p>
+        <p>Categoría: {{product.category}}</p>
+        <p>Stock: {{product.stock}}</p>
+        <img src="{{product.image}}" alt="{{product.name}}">
+        <button onclick="addToCart('{{product._id}}')">Agregar al carrito</button>
+        <a href="/products">Volver a productos</a>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        function addToCart(productId) {
+            socket.emit('addToCart', productId);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{{#> main}}
+<div class="wrapper">
+    <h1>Carrito</h1>
+    <ol id="cart-products-list">
+        {{#each cart.products}}
+        <li>
+            <span>{{this.product.name}}</span>
+            <span>{{this.product.price}}</span>
+            <span>Cantidad: {{this.quantity}}</span>
+            <button onclick="removeFromCart('{{../cart._id}}', '{{this.product._id}}')">Eliminar</button>
+        </li>
+        {{/each}}
+    </ol>
+    <a href="/">Volver a productos</a> <!-- Asegúrate de que el enlace apunte a la ruta correcta -->
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    function removeFromCart(cartId, productId) {
+        socket.emit('removeFromCart', { cartId, productId });
+    }
+
+    socket.on('cartUpdated', (cart) => {
+        const cartProductsList = document.getElementById('cart-products-list');
+        cartProductsList.innerHTML = '';
+        cart.products.forEach((product) => {
+            const li = document.createElement('li');
+            li.innerHTML = `<span>${product.product.name}</span><span>${product.product.price}</span><span>Cantidad: ${product.quantity}</span><button onclick="removeFromCart('${cart._id}', '${product.product._id}')">Eliminar</button>`;
+            cartProductsList.appendChild(li);
+        });
+    });
+</script>
+{{/main}}
