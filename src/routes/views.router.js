@@ -69,4 +69,35 @@ router.get('/carts/:cid', async (req, res) => {
     }
 });
 
+// Ruta para actualizar un carrito específico
+router.put('/carts/:cid', async (req, res) => {
+    try {
+        const { cid } = req.params;
+        const { products } = req.body;
+        const cart = await cartsModel.findByIdAndUpdate(cid, { products }, { new: true }).populate('products.product').lean();
+        if (!cart) {
+            return res.status(404).send('Carrito no encontrado');
+        }
+        res.status(200).json(cart);
+    } catch (error) {
+        console.error('Error al actualizar carrito:', error);
+        res.status(500).send('Error al actualizar carrito');
+    }
+});
+
+// Ruta para eliminar un carrito específico
+router.delete('/carts/:cid', async (req, res) => {
+    try {
+        const { cid } = req.params;
+        const cart = await cartsModel.findByIdAndDelete(cid);
+        if (!cart) {
+            return res.status(404).send('Carrito no encontrado');
+        }
+        res.status(200).send('Carrito eliminado');
+    } catch (error) {
+        console.error('Error al eliminar carrito:', error);
+        res.status(500).send('Error al eliminar carrito');
+    }
+});
+
 export default router;

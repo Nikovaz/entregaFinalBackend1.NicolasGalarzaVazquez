@@ -15,5 +15,5 @@ const productSchema = new mongoose.Schema({
 // Habilitar el plugin de paginación
 productSchema.plugin(mongoosePaginate);
 
-const productsModel = mongoose.model(collectionName, productSchema);
+const productsModel = mongoose.model('Product', productSchema); // Asegúrate de que el nombre del modelo sea 'Product'
 export default productsModel;
