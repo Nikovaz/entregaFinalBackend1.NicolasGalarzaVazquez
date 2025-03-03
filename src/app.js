@@ -2,12 +2,12 @@ import express from 'express';
 import handlebars from 'express-handlebars';
 import __dirname from './utils.js';
 import viewsRouter from './routes/views.router.js';
-import cartsRouter from './routes/carts.router.js'; // Importar el router de carritos
+import cartsRouter from './routes/carts.router.js'; 
 import { Server } from 'socket.io';
 import mongoose from 'mongoose';
 import * as dataOrders from '../db/data.js';
 import ordersModel from './models/orders.model.js';
-import productsModel from './models/products.model.js'; // Importar el modelo de productos
+import productsModel from './models/products.model.js'; 
 
 const app = express();
 const PORT = process.env.PORT || 9090; 
@@ -92,8 +92,8 @@ socketServer.on('connection', (socket) => {
 // Conectar a MongoDB usando Mongoose
 const connectMongoDB = async () => {
     try {
-        await mongoose.connect('mongodb://localhost:27017/pizzeria?retryWrites=true&w=majority');
-        console.log("Conectado con éxito a MongoDB usando Mongoose.");
+        await mongoose.connect('mongodb+srv://nikovaz1515:60jRQjCzuZ2CY8Gj@cluster0.09pmz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&appName=Cluster0');
+        console.log("Conectado con éxito a MongoDB Atlas usando Mongoose.");
 
         // Limpiar la colección de órdenes
         await ordersModel.deleteMany({});
