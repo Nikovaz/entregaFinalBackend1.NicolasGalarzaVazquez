@@ -8,6 +8,9 @@ import mongoose from 'mongoose';
 import * as dataOrders from '../db/data.js';
 import ordersModel from './models/orders.model.js';
 import productsModel from './models/products.model.js'; 
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 9090; 
@@ -92,7 +95,7 @@ socketServer.on('connection', (socket) => {
 // Conectar a MongoDB usando Mongoose
 const connectMongoDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://nikovaz1515:60jRQjCzuZ2CY8Gj@cluster0.09pmz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&appName=Cluster0');
+        await mongoose.connect(process.env.MONGODB_URI);
         console.log("Conectado con éxito a MongoDB Atlas usando Mongoose.");
 
         // Limpiar la colección de órdenes
